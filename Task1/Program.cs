@@ -1,12 +1,100 @@
-﻿namespace  Task1;
+﻿using System.Text;
+
+namespace  Task1;
 
 using System;
 using System.Text;
+using System.IO;
 
+/*
+  This program is created in order to implement the following tasks:
+•	Распечатать информацию о машине. Использовать для этого форматные и интерполированные строки. ✓
+•	Запросить у пользователя имя, фамилию и год рождения. Вывести информацию - имя и его возраст. 
+•	Вывести аргументы командной строки, переданные приложению, в обратном порядке. Реализация минимум с 2 разными 
+циклами. 
+•	Спросить у пользователя, хочет ли он записать текст. В случае положительного ответа считать строку, сохранить. 
+Повторять вопрос и считывание до отрицательного ответа. После вывести весь введённый текст. 
+•	Приложение принимает на вход путь до директории и распечатывает структуру каталогов и фалов в них. 
+*/
 class Program
 {
     static void Main(string [ ] args)
     {
+		// Распечатать информацию о машине. Использовать для этого форматные и интерполированные строки. 
+		Console.WriteLine("Machine name is: {0}", Environment.MachineName);
+        Console.WriteLine("OS version is: {0}", Environment.OSVersion);
+		Console.WriteLine($"{Environment.UserName} is logged in");
+        Console.WriteLine($"{Environment.CpuUsage} used CPU");
+        
+        // Запросить у пользователя имя, фамилию и год рождения. Вывести информацию - имя и его возраст. 
+        Console.WriteLine("Please provide your first name:");
+        string firstName = Console.ReadLine() ?? "Unknown";
+        Console.WriteLine("Please provide your last name:");
+        string lastName = Console.ReadLine() ?? "Unknown";
+        Console.WriteLine("Please provide your year of birth:");
+        int yearOfBirth = int.Parse(Console.ReadLine() ?? "0");
+        int age = DateTime.Now.Year - yearOfBirth;
+        Console.WriteLine($"Your name is {firstName} {lastName} and you are {age} years old.");
+        
+        // Вывести аргументы командной строки, переданные приложению, в обратном порядке. Реализация минимум с 2 разными циклами.
+        for (int i = args.Length; i > 0; i--)
+        {
+            Console.Write(" {0} ", args[i - 1]);
+        }
+        Console.WriteLine();
+        int j = args.Length;
+        while(j>0)
+        {
+            Console.Write($" {args[j-1]} ");
+            j--;
+        }
+        Console.WriteLine();
+        
+        // Спросить у пользователя, хочет ли он записать текст. В случае положительного ответа считать строку, сохранить. 
+        // Повторять вопрос и считывание до отрицательного ответа. После вывести весь введённый текст. 
+        StringBuilder sb = new StringBuilder();
+        string response = "yes";
+        while (response.ToLower() == "yes")
+        {
+            Console.WriteLine("Do you want to enter some text? (yes/no)");
+            response = Console.ReadLine() ?? "no";
+            if (response.ToLower() == "yes")
+            {
+                Console.WriteLine("Please enter your text:");
+                string userInput = Console.ReadLine() ?? "";
+                sb.AppendLine(userInput);
+            }
+        }
+        Console.WriteLine($"You entered the following text:\n{sb.ToString()}");
+        
+        // Приложение принимает на вход путь до директории и распечатывает структуру каталогов и файлов в них. 
+        // Since in the book there is no info about it I rea additional sources
+        Console.WriteLine("Please provide a directory path:");
+        string directoryPath = Console.ReadLine() ?? "";
+        if (Directory.Exists(directoryPath))
+        {
+            Console.WriteLine($"Directory: {directoryPath}");
+            string[] subdirectories = Directory.GetDirectories(directoryPath);
+            Console.WriteLine("Subdirectories:");
+            foreach (string subdir in subdirectories)
+            {
+                Console.WriteLine(subdir);
+            }
+            string[] files = Directory.GetFiles(directoryPath);
+            Console.WriteLine("Files:");
+            foreach (string file in files)
+            {
+                Console.WriteLine(file);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Directory does not exist.");
+        }
+        
+
+        // It was a small playground
+        /*
         ShowEnvironment.GetInfo();
         Console.BackgroundColor = ConsoleColor.White;
         Console.ForegroundColor = ConsoleColor.Black;
@@ -19,9 +107,14 @@ class Program
         StringComparisonRevised();
         StnngEqualitySpecifyingCompareRules();
         FunWithStnngBuilder();
-
+        */
     }
 
+
+
+
+
+/*
     static void DataTypeFunctionality()
     {
         Console.WriteLine("=> Data type Functionality:");
@@ -123,6 +216,6 @@ class Program
         Console.WriteLine("sb has {0} chars.", sb.Length);
         Console.WriteLine();
     }
-
+*/
 
 }
