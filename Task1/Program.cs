@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace  Task1;
+﻿namespace  Task1;
 
 using System;
 using System.Text;
@@ -68,7 +66,7 @@ class Program
         Console.WriteLine($"You entered the following text:\n{sb.ToString()}");
         
         // Приложение принимает на вход путь до директории и распечатывает структуру каталогов и файлов в них. 
-        // Since in the book there is no info about it I rea additional sources
+        // Since in the book there is no info about it I read additional sources
         Console.WriteLine("Please provide a directory path:");
         string directoryPath = Console.ReadLine() ?? "";
         if (Directory.Exists(directoryPath))
