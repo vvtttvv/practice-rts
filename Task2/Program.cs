@@ -68,7 +68,7 @@ public class Program
                         if (counter < 0)
                         {
                             Console.WriteLine("Brackets are not paired");
-                            return;
+                            break;
                         }
                     }
                 }
@@ -270,6 +270,7 @@ public class Program
 
 struct PersonStruct
 {
+    PersonClass personClass;
     public string Name;
     public string Surname;
     public int Age;

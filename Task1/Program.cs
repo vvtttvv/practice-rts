@@ -60,7 +60,7 @@ class Program
             {
                 Console.WriteLine("Please enter your text:");
                 string userInput = Console.ReadLine() ?? "";
-                sb.AppendLine(userInput);
+                sb.Append(userInput);
             }
         }
         Console.WriteLine($"You entered the following text:\n{sb.ToString()}");
